@@ -1,6 +1,6 @@
 /* TrackSlide
  * version: 1.0.0
- * github
+ * https://github.com/cuth/track-slide
  */
 (function (exports, $) {
     "use strict";
