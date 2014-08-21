@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>track-slide</title>
+    <meta name="viewport" content="width=device-width">
+    <link href="../track-slide.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .Box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 0 0;
+        }
+
+        .TrackSlide {
+            background: #f2f2f2;
+            margin: 0 0 40px;
+            height: 100px;
+        }
+
+        .TrackSlide-trackpadding ul {
+            padding: 0 25px;
+        }
+
+        .TrackSlide li {
+            box-sizing: border-box;
+            width: 170px;
+            padding: 5px;
+        }
+
+        .TrackSlide-margin li {
+            padding: 5px 0;
+            width: 160px;
+            margin-left: 15px;
+        }
+        .TrackSlide-margin li:first-child {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="Box">
+
+        <h3>With padding</h3>
+        <div id="slide1" class="TrackSlide">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+                <li><img src="img/image5.jpg">
+            </ul>
+        </div>
+
+        <h3>Two images</h3>
+        <div id="slide2" class="TrackSlide">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+            </ul>
+        </div>
+
+        <h3>One image</h3>
+        <div id="slide3" class="TrackSlide">
+            <ul>
+                <li><img src="img/image1.jpg">
+            </ul>
+        </div>
+
+        <h3>With margin</h3>
+        <div id="slide4" class="TrackSlide TrackSlide-margin">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+                <li><img src="img/image5.jpg">
+            </ul>
+        </div>
+
+        <h3>With track padding</h3>
+        <div id="slide5" class="TrackSlide TrackSlide-trackpadding">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+                <li><img src="img/image5.jpg">
+            </ul>
+        </div>
+    </div>
+
+    <script src="lib/jquery-2.1.1.js"></script>
+    <script src="lib/rAF.js"></script>
+    <script src="lib/tween.js"></script>
+    <script src="lib/jquery.dragger.js"></script>
+    <script src="../track-slide.js"></script>
+    <script>
+        var ts1 = new TrackSlide('#slide1');
+        var ts2 = new TrackSlide('#slide2');
+        var ts3 = new TrackSlide('#slide3');
+        var ts4 = new TrackSlide('#slide4');
+        var ts5 = new TrackSlide('#slide5');
+    </script>
+</body>
+</html>
