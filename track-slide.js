@@ -6,12 +6,12 @@
 
 /*exported TrackSlide */
 
-var TrackSlide = (function ($, Dragger, TWEEN) {
+var TrackSlide = (function ($, Dragger) {
 
     'use strict';
 
     var moveTo = function (index) {
-        index = Math.min(index, this.len - this.m.fit);
+        index = Math.min(index, this.len - 1);
         index = Math.max(0, index);
 
         // How far from the left is the item
@@ -43,7 +43,7 @@ var TrackSlide = (function ($, Dragger, TWEEN) {
         if (!hasDragged) return;
 
         // hard to know what to set the offset value to
-        var offset = (this.m.item / 3);
+        var offset = 0; //(this.m.item / 3);
         var closest = Math.round((handle.x - offset) / (this.m.item + this.m.gap));
         closest = Math.min(0, closest);
         closest = Math.max(closest, -this.len + this.m.fit);
@@ -76,8 +76,16 @@ var TrackSlide = (function ($, Dragger, TWEEN) {
         moveTo.call(this, this.current);
     };
 
+    var setFocus = function (e) {
+        if (this.dragger.isDragging) return;
+        var $item = $(e.target).closest('li');
+        var index = this.$items.index($item);
+        moveTo.call(this, index);
+    };
+
     var bindEvents = function () {
         $(window).on('resize', debounce(resize.bind(this)));
+        this.$el.on('focus', 'ul *', setFocus.bind(this));
     };
 
     var getDraggerOptions = function () {
@@ -131,4 +139,4 @@ var TrackSlide = (function ($, Dragger, TWEEN) {
 
     return TrackSlide;
 
-}(jQuery || Zepto || $, Dragger, TWEEN));
+}(jQuery || Zepto || $, Dragger));
