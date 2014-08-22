@@ -1,6 +1,6 @@
 /* track-slide
  * version: 1.1.0
- * https://github.com/cuth/track-slide
+ * https://bitbucket.org/c2group/track-slide
  * @preserve
  */
 
