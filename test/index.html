@@ -23,6 +23,11 @@
             height: 100px;
         }
 
+        .TrackSlide-fourexact {
+            max-width: 680px;
+            margin: 0 auto 40px;
+        }
+
         .TrackSlide-trackpadding ul {
             padding: 0 25px;
         }
@@ -117,6 +122,29 @@
                 <li><img src="img/image5.jpg">
             </ul>
         </div>
+
+        <h3>With exact fit</h3>
+        <div id="slide6" class="TrackSlide TrackSlide-fourexact">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+            </ul>
+        </div>
+
+        <h3>With exact fit</h3>
+        <div id="slide7" class="TrackSlide TrackSlide-fourexact">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+                <li><img src="img/image5.jpg">
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+            </ul>
+        </div>
     </div>
 
     <script src="lib/jquery-2.1.1.js"></script>
@@ -130,6 +158,8 @@
         var ts3 = new TrackSlide('#slide3');
         var ts4 = new TrackSlide('#slide4');
         var ts5 = new TrackSlide('#slide5');
+        var ts6 = new TrackSlide('#slide6');
+        var ts7 = new TrackSlide('#slide7');
     </script>
 </body>
 </html>
