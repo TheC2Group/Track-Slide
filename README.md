@@ -58,5 +58,5 @@ Navigate to localhost:8080/test/
 
 Lint the JavaScript:
 ```
-jshint dist/*.js
+jshint track-slide.js
 ```

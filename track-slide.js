@@ -97,7 +97,7 @@ var TrackSlide = (function ($, Dragger) {
             'gap': gap,
             'fit': fit
         };
-    }
+    };
 
     var resize = function () {
         this.m = getMeasurement.call(this);
