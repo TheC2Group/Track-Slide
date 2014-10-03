@@ -1,5 +1,5 @@
 /* track-slide
- * version: 1.1.0
+ * version: 1.2.0
  * https://bitbucket.org/c2group/track-slide
  * @preserve
  */
@@ -10,7 +10,35 @@ var TrackSlide = (function ($, Dragger) {
 
     'use strict';
 
+    var previous = function () {
+        var num = this.current - 1;
+        if (num < 0) return;
+        moveTo.call(this, num);
+    };
+
+    var next = function () {
+        var num = this.current + 1;
+        if (num > this.len - this.m.fit) return;
+        moveTo.call(this, num);
+    };
+
+    var previousPage = function () {
+        if (this.current === 0) return;
+        var num = this.current - this.m.fit;
+        if (num < 0) num = 0;
+        moveTo.call(this, num);
+    };
+
+    var nextPage = function () {
+        var max = this.len - this.m.fit;
+        if (this.current === max) return;
+        var num = this.current + this.m.fit;
+        if (num > max) num = max;
+        moveTo.call(this, num);
+    };
+
     var moveTo = function (index) {
+
         index = Math.min(index, this.len - 1);
         index = Math.max(0, index);
 
@@ -122,6 +150,10 @@ var TrackSlide = (function ($, Dragger) {
 
     TrackSlide.prototype.moveTo = moveTo;
     TrackSlide.prototype.resize = resize;
+    TrackSlide.prototype.previous = previous;
+    TrackSlide.prototype.next = next;
+    TrackSlide.prototype.previousPage = previousPage;
+    TrackSlide.prototype.nextPage = nextPage;
 
     function debounce(fn) {
         var id;

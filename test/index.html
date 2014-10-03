@@ -77,6 +77,12 @@
                 <li><img src="img/image5.jpg">
             </ul>
         </div>
+        <div class="controls">
+            <a href="#" previous="slide1">Previous</a> |
+            <a href="#" next="slide1">Next</a> |
+            <a href="#" previous-page="slide1">Previous Page</a> |
+            <a href="#" next-page="slide1">Next Page</a>
+        </div>
 
         <h3>Images as links</h3>
         <div id="slide2" class="TrackSlide">
@@ -132,6 +138,12 @@
                 <li><img src="img/image4.jpg">
             </ul>
         </div>
+        <div class="controls">
+            <a href="#" previous="slide6">Previous</a> |
+            <a href="#" next="slide6">Next</a> |
+            <a href="#" previous-page="slide6">Previous Page</a> |
+            <a href="#" next-page="slide6">Next Page</a>
+        </div>
 
         <h3>With exact fit</h3>
         <div id="slide7" class="TrackSlide TrackSlide-fourexact">
@@ -145,6 +157,12 @@
                 <li><img src="img/image2.jpg">
             </ul>
         </div>
+        <div class="controls">
+            <a href="#" previous="slide7">Previous</a> |
+            <a href="#" next="slide7">Next</a> |
+            <a href="#" previous-page="slide7">Previous Page</a> |
+            <a href="#" next-page="slide7">Next Page</a>
+        </div>
     </div>
 
     <script src="lib/jquery-2.1.1.js"></script>
@@ -153,13 +171,51 @@
     <script src="lib/jquery.dragger.js"></script>
     <script src="../track-slide.js"></script>
     <script>
-        var ts1 = new TrackSlide('#slide1');
-        var ts2 = new TrackSlide('#slide2');
-        var ts3 = new TrackSlide('#slide3');
-        var ts4 = new TrackSlide('#slide4');
-        var ts5 = new TrackSlide('#slide5');
-        var ts6 = new TrackSlide('#slide6');
-        var ts7 = new TrackSlide('#slide7');
+        var slidesIDs = [
+            'slide1',
+            'slide2',
+            'slide3',
+            'slide4',
+            'slide5',
+            'slide6',
+            'slide7',
+            'slide8'
+        ];
+
+        var sliders = {};
+
+        slidesIDs.forEach(function (slide) {
+            sliders[slide] = new TrackSlide('#' + slide);
+        });
+
+        $(document).on('click', '[previous]', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('previous');
+
+            sliders[id].previous();
+        });
+
+        $(document).on('click', '[next]', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('next');
+
+            sliders[id].next();
+        });
+
+        $(document).on('click', '[previous-page]', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('previous-page');
+
+            sliders[id].previousPage();
+        });
+
+        $(document).on('click', '[next-page]', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('next-page');
+
+            sliders[id].nextPage();
+        });
+
     </script>
 </body>
 </html>
