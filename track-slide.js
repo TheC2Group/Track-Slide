@@ -1,5 +1,5 @@
 /* track-slide
- * version: 1.2.0
+ * version: 1.2.1
  * https://bitbucket.org/c2group/track-slide
  * @preserve
  */
@@ -39,7 +39,7 @@ var TrackSlide = (function ($, Dragger) {
 
     var moveTo = function (index) {
 
-        index = Math.min(index, this.len - 1);
+        index = Math.min(index, this.len - this.m.fit);
         index = Math.max(0, index);
 
         // How far from the left is the item
@@ -108,7 +108,14 @@ var TrackSlide = (function ($, Dragger) {
         if (this.dragger.isDragging) return;
         var $item = $(e.target).closest('li');
         var index = this.$items.index($item);
-        moveTo.call(this, index);
+
+        // move the track if the focused element is out of view
+        if (index < this.current) {
+            moveTo.call(this, index);
+        }
+        if (index >= this.current + this.m.fit) {
+            moveTo.call(this, index - this.m.fit + 1);
+        }
     };
 
     var bindEvents = function () {
