@@ -84,6 +84,28 @@
             <a href="#" next-page="slide1">Next Page</a>
         </div>
 
+        <h3>With padding and pageLock</h3>
+        <div id="slide1b" class="TrackSlide">
+            <ul>
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+                <li><img src="img/image5.jpg">
+                <li><img src="img/image1.jpg">
+                <li><img src="img/image2.jpg">
+                <li><img src="img/image3.jpg">
+                <li><img src="img/image4.jpg">
+                <li><img src="img/image5.jpg">
+            </ul>
+        </div>
+        <div class="controls">
+            <a href="#" previous="slide1b">Previous</a> |
+            <a href="#" next="slide1b">Next</a> |
+            <a href="#" previous-page="slide1b">Previous Page</a> |
+            <a href="#" next-page="slide1b">Next Page</a>
+        </div>
+
         <h3>Images as links</h3>
         <div id="slide2" class="TrackSlide">
             <ul>
@@ -177,7 +199,7 @@
     <script src="../track-slide.js"></script>
     <script>
         var slidesIDs = [
-            'slide1',
+            'slide1',,
             'slide2',
             'slide3',
             'slide4',
@@ -191,6 +213,10 @@
 
         slidesIDs.forEach(function (slide) {
             sliders[slide] = new TrackSlide('#' + slide);
+        });
+
+        sliders.slide1b = new TrackSlide('#slide1b', {
+            pageLock: true
         });
 
         $(document).on('click', '[previous]', function (e) {
