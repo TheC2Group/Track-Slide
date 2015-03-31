@@ -1,6 +1,6 @@
 /* track-slide
- * version: 1.2.1
- * https://bitbucket.org/c2group/track-slide
+ * version: 1.3.0
+ * https://stash.c2mpg.com:8443/projects/C2/repos/track-slide
  * @preserve
  */
 
@@ -11,7 +11,12 @@ var TrackSlide = (function ($, Dragger) {
     'use strict';
 
     var defaults = {
-        pageLock: false
+        pageLock: false,
+        trackSelector: 'ul',
+        cellSelector: 'li',
+        autoResize: 'true',
+        animationDuration: 400,
+        useTransform: false
     };
 
     var previous = function () {
@@ -75,7 +80,11 @@ var TrackSlide = (function ($, Dragger) {
             }
         }
 
-        this.$track.stop(true).animate({'left': -distance}, 400, 'swing');
+        if (this.opts.useTransform) {
+            this.$track.css('transform', 'translate(' + -distance + 'px, 0px)');
+        } else {
+            this.$track.stop(true).animate({'left': -distance}, this.opts.animationDuration, 'swing');
+        }
 
         this.dragger.setPosition({
             x: -distance,
@@ -83,14 +92,29 @@ var TrackSlide = (function ($, Dragger) {
         });
         this.current = index;
 
-        //this.events.trigger('done', index, this.len - this.m.fit);
+        // trigger moved event
+    };
+
+    var onStart = function (handle) {
+        if (this.opts.useTransform) {
+            this.$el.addClass('isDragging');
+        }
     };
 
     var onDrag = function (handle) {
-        this.$track.css('left', handle.x);
+        if (this.opts.useTransform) {
+            this.$track.css('transform', 'translate(' + handle.x + 'px, 0px)');
+        } else {
+            this.$track.css('left', handle.x);
+        }
     };
 
     var onStop = function (handle, hasDragged) {
+
+        if (this.opts.useTransform) {
+            this.$el.removeClass('isDragging');
+        }
+
         if (!hasDragged) return;
 
         // hard to know what to set the offset value to
@@ -134,8 +158,7 @@ var TrackSlide = (function ($, Dragger) {
 
     var setFocus = function (e) {
         if (this.dragger.isDragging) return;
-        var $item = $(e.target).closest('li');
-        var index = this.$items.index($item);
+        var index = this.$items.index(e.delegateTarget);
 
         // move the track if the focused element is out of view
         if (index < this.current) {
@@ -147,8 +170,11 @@ var TrackSlide = (function ($, Dragger) {
     };
 
     var bindEvents = function () {
-        $(window).on('resize', debounce(resize.bind(this)));
-        this.$el.on('focus', 'ul *', setFocus.bind(this));
+        if (this.opts.autoResize) {
+            $(window).on('resize', debounce(resize.bind(this)));
+        }
+
+        this.$items.on('focus', setFocus.bind(this));
     };
 
     var getDraggerOptions = function () {
@@ -161,13 +187,10 @@ var TrackSlide = (function ($, Dragger) {
 
     var init = function () {
         if (!this.$el.length) return false;
-        this.$track = this.$el.find('ul');
+        this.$track = this.$el.find(this.opts.trackSelector);
         if (!this.$track.length) return false;
 
-        // Add an event emitter
-        // this.events = new main.EventHandler();
-
-        this.$items = this.$track.find('li');
+        this.$items = this.$track.find(this.opts.cellSelector);
         this.len = this.$items.length;
         this.m = getMeasurement.call(this);
         this.current = 0;
@@ -190,6 +213,7 @@ var TrackSlide = (function ($, Dragger) {
     TrackSlide.prototype.next = next;
     TrackSlide.prototype.previousPage = previousPage;
     TrackSlide.prototype.nextPage = nextPage;
+    TrackSlide.prototype.resize = resize;
 
     function debounce(fn) {
         var id;
