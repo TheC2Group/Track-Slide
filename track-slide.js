@@ -10,6 +10,10 @@ var TrackSlide = (function ($, Dragger) {
 
     'use strict';
 
+    var defaults = {
+        pageLock: false
+    };
+
     var previous = function () {
         var num = this.current - 1;
         if (num < 0) return;
@@ -23,6 +27,11 @@ var TrackSlide = (function ($, Dragger) {
     };
 
     var previousPage = function () {
+        if (this.opts.pageLock) {
+            previous.call(this);
+            return;
+        }
+
         if (this.current === 0) return;
         var num = this.current - this.m.fit;
         if (num < 0) num = 0;
@@ -30,6 +39,11 @@ var TrackSlide = (function ($, Dragger) {
     };
 
     var nextPage = function () {
+        if (this.opts.pageLock) {
+            next.call(this);
+            return;
+        }
+
         var max = this.len - this.m.fit;
         if (this.current === max) return;
         var num = this.current + this.m.fit;
@@ -39,17 +53,26 @@ var TrackSlide = (function ($, Dragger) {
 
     var moveTo = function (index) {
 
-        index = Math.min(index, this.len - this.m.fit);
+        var distance;
+
         index = Math.max(0, index);
 
-        // How far from the left is the item
-        var distance = index * this.m.item + index * this.m.gap;
+        if (this.opts.pageLock) {
+            index = Math.min(index, Math.ceil(this.len / this.m.fit) - 1);
 
-        // If the track is longer than the bounds
-        // And the distance to the item is greater than the difference between the bounds and the length of the track
-        // Set the distance to the difference
-        if (this.m.track > this.m.bounds && distance > this.m.track - this.m.bounds) {
-            distance = this.m.track - this.m.bounds;
+            distance = index * this.m.fit * this.m.item + index * this.m.fit * this.m.gap;
+        } else {
+            index = Math.min(index, this.len - this.m.fit);
+
+            // How far from the left is the item
+            distance = index * this.m.item + index * this.m.gap;
+
+            // If the track is longer than the bounds
+            // And the distance to the item is greater than the difference between the bounds and the length of the track
+            // Set the distance to the difference
+            if (this.m.track > this.m.bounds && distance > this.m.track - this.m.bounds) {
+                distance = this.m.track - this.m.bounds;
+            }
         }
 
         this.$track.stop(true).animate({'left': -distance}, 400, 'swing');
@@ -72,9 +95,14 @@ var TrackSlide = (function ($, Dragger) {
 
         // hard to know what to set the offset value to
         var offset = 0; //(this.m.item / 3);
-        var closest = Math.round((handle.x - offset) / (this.m.item + this.m.gap));
-        closest = Math.min(0, closest);
-        closest = Math.max(closest, -this.len + this.m.fit);
+        var closest;
+
+        if (this.opts.pageLock) {
+            closest = Math.round(handle.x / ((this.m.item + this.m.gap) * this.m.fit));
+        } else {
+            closest = Math.round((handle.x - offset) / (this.m.item + this.m.gap));
+        }
+
         moveTo.call(this, -closest);
     };
 
@@ -150,8 +178,9 @@ var TrackSlide = (function ($, Dragger) {
         return true;
     };
 
-    TrackSlide = function (el) {
+    TrackSlide = function (el, options) {
         this.$el = $(el);
+        this.opts = $.extend({}, defaults, options);
         this.result = init.call(this);
     };
 
@@ -178,4 +207,4 @@ var TrackSlide = (function ($, Dragger) {
 
     return TrackSlide;
 
-}(jQuery || Zepto || $, Dragger));
+}(jQuery, Dragger));
