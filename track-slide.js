@@ -216,7 +216,11 @@ var TrackSlide = (function ($, Dragger) {
     TrackSlide.prototype.resize = resize;
 
     function debounce(fn) {
-        var id;
+        if (typeof requestAnimationFrame === 'undefined') {
+            return fn;
+        }
+
+        var id = null;
         return function () {
             var args = arguments;
             if (id !== null) {
