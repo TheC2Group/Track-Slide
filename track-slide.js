@@ -1,5 +1,5 @@
 /* track-slide
- * version: 1.3.0
+ * version: 1.3.1
  * https://stash.c2mpg.com:8443/projects/C2/repos/track-slide
  * @preserve
  */
