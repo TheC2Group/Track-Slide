@@ -1,13 +1,29 @@
 Track Slide
 ===========
 
-Constructor to slide multiple objects on a track rather than individually.
+> Constructor to slide multiple objects on a track rather than individually.
 
-Dependencies
-------------
 
-* [jQuery](http://jquery.com/)
-* [jquery.dragger](https://github.com/cuth/jquery.dragger)
+To get started
+--------------
+
+### CommonJS
+
+```
+$ get clone ssh://git@stash.c2mpg.com:7999/c2/track-slide.git
+```
+
+```js
+var TrackSlide = require('./track-slide');
+```
+
+### Browser Global
+
+```html
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="standalone/track-slide.js"></script>
+```
+
 
 Example
 -------
@@ -28,7 +44,7 @@ Example
 var slider = new TrackSlide('.TrackSlide');
 
 // Change the slider to a specifig index
-slider.moveTo(1);
+slider.slideTo(1);
 
 // Remeasure the slider
 slider.resize();
@@ -46,6 +62,19 @@ slider.previousPage();
 slider.nextPage();
 ```
 
+Events
+------
+
+### slideTo
+
+```js
+slider.on('slideTo', function (index) {
+    console.log('Slider moved to ' + index);
+});
+
+// slider.off('slideTo');
+```
+
 
 Test
 ----
@@ -60,3 +89,9 @@ Lint the JavaScript:
 ```
 jshint track-slide.js
 ```
+
+
+License
+-------
+
+MIT © [The C2 Group](https://c2experience.com)
