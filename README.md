@@ -10,11 +10,11 @@ To get started
 ### CommonJS
 
 ```
-$ get clone ssh://git@stash.c2mpg.com:7999/c2/track-slide.git
+$ npm install track-slide
 ```
 
 ```js
-var TrackSlide = require('./track-slide');
+var TrackSlide = require('track-slide');
 ```
 
 ### Browser Global

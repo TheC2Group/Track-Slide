@@ -1,7 +1,7 @@
 /*!
  * Track Slide
- * https://stash.c2mpg.com:8443/projects/C2/repos/track-slide
- * @version 2.0.0
+ * https://github.com/TheC2Group/track-slide
+ * @version 2.1.0
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 
@@ -18,7 +18,8 @@ var defaults = {
     cellSelector: 'li',
     autoResize: 'true',
     animationDuration: 400,
-    useTransform: false
+    useTransform: false,
+    allowEmptySpace: false
 };
 
 var slideTo = function (index) {
@@ -32,7 +33,12 @@ var slideTo = function (index) {
 
         distance = index * this.m.fit * this.m.item + index * this.m.fit * this.m.gap;
     } else {
-        index = Math.min(index, this.len - this.m.fit);
+
+        if (this.opts.allowEmptySpace) {
+            index = Math.min(index, this.len - 1);
+        } else {
+            index = Math.min(index, this.len - this.m.fit);
+        }
 
         // How far from the left is the item
         distance = index * this.m.item + index * this.m.gap;
