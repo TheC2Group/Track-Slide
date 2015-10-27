@@ -21,6 +21,8 @@ var TrackSlide = require('track-slide');
 
 ```html
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="TheC2Group/event-handler.js"></script>
+<script src="cuth/dist/jquery.dragger.js"></script>
 <script src="standalone/track-slide.js"></script>
 ```
 
@@ -35,13 +37,21 @@ Example
         ...
     </ul>
 </div>
-
-<link href="track-slide.css" rel="stylesheet">
-<script src="track-slide.js"></script>
 ```
 
 ```js
-var slider = new TrackSlide('.TrackSlide');
+// This wouldn't be necessary since all these options are the defaults
+var options = {
+    pageLock: false,
+    trackSelector: 'ul',
+    cellSelector: 'li',
+    autoResize: 'true',
+    animationDuration: 400,
+    useTransform: false,
+    allowEmptySpace: false
+};
+
+var slider = new TrackSlide('.TrackSlide', options);
 
 // Change the slider to a specifig index
 slider.slideTo(1);
@@ -74,6 +84,8 @@ slider.on('slideTo', function (index) {
 
 // slider.off('slideTo');
 ```
+
+### hasDragged
 
 
 Test

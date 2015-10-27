@@ -1,10 +1,10 @@
 {
   "name": "track-slide",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Constructor to slide multiple objects on a track rather than individually.",
   "main": "track-slide.js",
   "scripts": {
-    "standalone": "browserify track-slide.js --outfile standalone/track-slide.js --standalone TrackSlide --exclude jquery",
+    "standalone": "browserify -t [exposify --expose [ --jquery jQuery --c2-event-handler eventHandler --jquery-dragger Dragger ] ] track-slide.js --outfile standalone/track-slide.js --standalone TrackSlide",
     "dist": "uglifyjs standalone/track-slide.js --output standalone/track-slide.min.js --comments",
     "build": "npm run standalone && npm run dist"
   },
@@ -22,5 +22,8 @@
     "c2-event-handler": "^2.3.1",
     "jquery": "^2.1.4",
     "jquery-dragger": "^1.5.0"
+  },
+  "devDependencies": {
+    "exposify": "^0.5.0"
   }
 }

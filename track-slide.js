@@ -1,13 +1,13 @@
 /*!
  * Track Slide
  * https://github.com/TheC2Group/track-slide
- * @version 2.1.0
+ * @version 2.2.0
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 
 'use strict';
 
-var $ = jQuery || require('jquery');
+var $ = require('jquery');
 var eventHandler = require('c2-event-handler');
 var Dragger = require('jquery-dragger');
 var debounce = require('bloody-debounce-af');
@@ -124,6 +124,7 @@ var onStop = function (handle, hasDragged) {
     }
 
     if (!hasDragged) return;
+    this.emit('hasDragged');
 
     // hard to know what to set the offset value to
     var offset = 0; //(this.m.item / 3);
