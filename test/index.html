@@ -5,58 +5,7 @@
     <title>track-slide</title>
     <meta name="viewport" content="width=device-width">
     <link href="../track-slide.css" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .Box {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 0 0;
-        }
-
-        .TrackSlide {
-            background: #f2f2f2;
-            margin: 0 0 40px;
-            height: 100px;
-        }
-
-        .TrackSlide-fourexact {
-            max-width: 680px;
-            margin: 0 auto 40px;
-        }
-
-        .TrackSlide-trackpadding ul {
-            padding: 0 25px;
-        }
-
-        .TrackSlide li {
-            box-sizing: border-box;
-            width: 170px;
-            padding: 5px;
-        }
-
-        .TrackSlide a {
-            display: block;
-        }
-
-        .TrackSlide img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .TrackSlide-margin li {
-            padding: 5px 0;
-            width: 160px;
-            margin-left: 15px;
-        }
-        .TrackSlide-margin li:first-child {
-            margin: 0;
-        }
-    </style>
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 
@@ -193,58 +142,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="../standalone/track-slide.js"></script>
-    <script>
-        var slidesIDs = [
-            'slide1',,
-            'slide2',
-            'slide3',
-            'slide4',
-            'slide5',
-            'slide6',
-            'slide7',
-            'slide8'
-        ];
-
-        var sliders = {};
-
-        slidesIDs.forEach(function (slide) {
-            sliders[slide] = new TrackSlide('#' + slide);
-        });
-
-        sliders.slide1b = new TrackSlide('#slide1b', {
-            pageLock: true
-        });
-
-        $(document).on('click', '[previous]', function (e) {
-            e.preventDefault();
-            var id = $(this).attr('previous');
-
-            sliders[id].previous();
-        });
-
-        $(document).on('click', '[next]', function (e) {
-            e.preventDefault();
-            var id = $(this).attr('next');
-
-            sliders[id].next();
-        });
-
-        $(document).on('click', '[previous-page]', function (e) {
-            e.preventDefault();
-            var id = $(this).attr('previous-page');
-
-            sliders[id].previousPage();
-        });
-
-        $(document).on('click', '[next-page]', function (e) {
-            e.preventDefault();
-            var id = $(this).attr('next-page');
-
-            sliders[id].nextPage();
-        });
-
-    </script>
+    <script src="js/bundle.js"></script>
 </body>
 </html>

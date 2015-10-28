@@ -1,7 +1,7 @@
 /*!
  * Track Slide
  * https://github.com/TheC2Group/track-slide
- * @version 2.2.0
+ * @version 2.2.1
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 
@@ -10,7 +10,7 @@
 var $ = require('jquery');
 var eventHandler = require('c2-event-handler');
 var Dragger = require('jquery-dragger');
-var debounce = require('bloody-debounce-af');
+var debounce = require('c2-debounce-af');
 
 var defaults = {
     pageLock: false,
