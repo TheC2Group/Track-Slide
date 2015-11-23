@@ -1,51 +1,8 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.TrackSlide = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports["default"] = function (fn) {
-    if (typeof window !== "undefined" && !(requestAnimationFrame in window)) {
-        return fn;
-    }
-
-    var id = null;
-
-    return function () {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        if (id !== null) {
-            cancelAnimationFrame(id);
-        }
-
-        id = requestAnimationFrame(function () {
-            fn.apply(undefined, args);
-            id = null;
-        });
-    };
-};
-
-;
-module.exports = exports["default"];
-
-
-},{}],2:[function(require,module,exports){
-(function (global){
-/*!
- * Track Slide
- * https://github.com/TheC2Group/track-slide
- * @version 2.2.1
- * @license MIT (c) The C2 Group (c2experience.com)
- */
-
-'use strict';
-
-var $ = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
-var eventHandler = (typeof window !== "undefined" ? window['eventHandler'] : typeof global !== "undefined" ? global['eventHandler'] : null);
-var Dragger = (typeof window !== "undefined" ? window['Dragger'] : typeof global !== "undefined" ? global['Dragger'] : null);
+var $ = require('jquery');
+var eventHandler = require('c2-event-handler');
+var Dragger = require('jquery-dragger');
 var debounce = require('c2-debounce-af');
 
 var defaults = {
@@ -58,7 +15,7 @@ var defaults = {
     allowEmptySpace: false
 };
 
-var slideTo = function (index) {
+var slideTo = function slideTo(index) {
 
     var distance;
 
@@ -90,7 +47,7 @@ var slideTo = function (index) {
     if (this.opts.useTransform) {
         this.$track.css('transform', 'translate(' + -distance + 'px, 0px)');
     } else {
-        this.$track.stop(true).animate({'left': -distance}, this.opts.animationDuration, 'swing');
+        this.$track.stop(true).animate({ 'left': -distance }, this.opts.animationDuration, 'swing');
     }
 
     this.dragger.setPosition({
@@ -102,19 +59,19 @@ var slideTo = function (index) {
     this.emit('slideTo', index);
 };
 
-var previous = function () {
+var previous = function previous() {
     var num = this.current - 1;
     if (num < 0) return;
     slideTo.call(this, num);
 };
 
-var next = function () {
+var next = function next() {
     var num = this.current + 1;
     if (num > this.len - this.m.fit) return;
     slideTo.call(this, num);
 };
 
-var previousPage = function () {
+var previousPage = function previousPage() {
     if (this.opts.pageLock) {
         previous.call(this);
         return;
@@ -126,7 +83,7 @@ var previousPage = function () {
     slideTo.call(this, num);
 };
 
-var nextPage = function () {
+var nextPage = function nextPage() {
     if (this.opts.pageLock) {
         next.call(this);
         return;
@@ -139,13 +96,13 @@ var nextPage = function () {
     slideTo.call(this, num);
 };
 
-var onStart = function () {
+var onStart = function onStart() {
     if (this.opts.useTransform) {
         this.$el.addClass('isDragging');
     }
 };
 
-var onDrag = function (handle) {
+var onDrag = function onDrag(handle) {
     if (this.opts.useTransform) {
         this.$track.css('transform', 'translate(' + handle.x + 'px, 0px)');
     } else {
@@ -153,7 +110,7 @@ var onDrag = function (handle) {
     }
 };
 
-var onStop = function (handle, hasDragged) {
+var onStop = function onStop(handle, hasDragged) {
 
     if (this.opts.useTransform) {
         this.$el.removeClass('isDragging');
@@ -175,7 +132,7 @@ var onStop = function (handle, hasDragged) {
     slideTo.call(this, -closest);
 };
 
-var getMeasurement = function () {
+var getMeasurement = function getMeasurement() {
     var bounds = this.$el.width();
     var track = this.$track.outerWidth();
     var trackPadding = track - this.$track.width();
@@ -196,12 +153,12 @@ var getMeasurement = function () {
     };
 };
 
-var resize = function () {
+var resize = function resize() {
     this.m = getMeasurement.call(this);
     slideTo.call(this, this.current);
 };
 
-var setFocus = function (e) {
+var setFocus = function setFocus(e) {
     if (this.dragger.isDragging) return;
     var index = this.$items.index(e.delegateTarget);
 
@@ -214,7 +171,7 @@ var setFocus = function (e) {
     }
 };
 
-var bindEvents = function () {
+var bindEvents = function bindEvents() {
     if (this.opts.autoResize) {
         $(window).on('resize', debounce(resize.bind(this)));
     }
@@ -222,7 +179,7 @@ var bindEvents = function () {
     this.$items.on('focus', setFocus.bind(this));
 };
 
-var getDraggerOptions = function () {
+var getDraggerOptions = function getDraggerOptions() {
     return {
         'start': onStart.bind(this),
         'drag': onDrag.bind(this),
@@ -231,7 +188,7 @@ var getDraggerOptions = function () {
     };
 };
 
-var init = function () {
+var init = function init() {
     if (!this.$el.length) return false;
     this.$track = this.$el.find(this.opts.trackSelector);
     if (!this.$track.length) return false;
@@ -247,7 +204,7 @@ var init = function () {
     return true;
 };
 
-var TrackSlide = function (el, options) {
+var TrackSlide = function TrackSlide(el, options) {
     this.$el = $(el);
     this.opts = $.extend({}, defaults, options);
     this.result = init.call(this);
@@ -264,7 +221,3 @@ TrackSlide.prototype.nextPage = nextPage;
 TrackSlide.prototype.resize = resize;
 
 module.exports = TrackSlide;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"c2-debounce-af":1}]},{},[2])(2)
-});

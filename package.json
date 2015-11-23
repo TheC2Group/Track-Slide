@@ -1,13 +1,16 @@
 {
   "name": "track-slide",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Constructor to slide multiple objects on a track rather than individually.",
-  "main": "track-slide.js",
+  "jsnext:main": "track-slide.js",
+  "main": "cjs/track-slide.js",
+  "export": "TrackSlide",
   "scripts": {
-    "bundle-test": "browserify test/js/main.js > test/js/bundle.js",
-    "standalone": "browserify -t [exposify --expose [ --jquery jQuery --c2-event-handler eventHandler --jquery-dragger Dragger ] ] track-slide.js --outfile standalone/track-slide.js --standalone TrackSlide",
-    "dist": "uglifyjs standalone/track-slide.js --output standalone/track-slide.min.js --comments",
-    "build": "npm run bundle-test && npm run standalone && npm run dist"
+    "iife": "rollup -c rollup-iife.config.js",
+    "cjs": "rollup -c rollup-cjs.config.js",
+    "umd": "rollup -c rollup-umd.config.js",
+    "build": "npm run iife && npm run cjs && npm run umd",
+    "bundle-test": "browserify test/js/main.js > test/js/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,11 @@
   ],
   "author": "The C2 Group",
   "license": "MIT",
+  "copyright": "(c) The C2 Group (c2experience.com)",
+  "bugs": {
+    "url": "https://github.com/TheC2Group/track-slide/issues"
+  },
+  "homepage": "https://github.com/TheC2Group/track-slide",
   "dependencies": {
     "c2-debounce-af": "^2.0.0",
     "c2-event-handler": "^2.3.1",
@@ -25,6 +33,8 @@
     "jquery-dragger": "^1.5.1"
   },
   "devDependencies": {
-    "exposify": "^0.5.0"
+    "babel-preset-es2015-rollup": "^1.0.0",
+    "rollup": "^0.21.0",
+    "rollup-plugin-babel": "^2.1.0"
   }
 }

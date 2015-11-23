@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-var TrackSlide = require('../../track-slide');
+var TrackSlide = require('../../cjs/track-slide');
 
 var slidesIDs = [
     'slide1',,

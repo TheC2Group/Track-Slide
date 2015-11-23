@@ -23,7 +23,7 @@ var TrackSlide = require('track-slide');
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="TheC2Group/event-handler.js"></script>
 <script src="cuth/dist/jquery.dragger.js"></script>
-<script src="standalone/track-slide.js"></script>
+<script src="iife/track-slide.js"></script>
 ```
 
 

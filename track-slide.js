@@ -1,16 +1,9 @@
-/*!
- * Track Slide
- * https://github.com/TheC2Group/track-slide
- * @version 2.2.1
- * @license MIT (c) The C2 Group (c2experience.com)
- */
-
 'use strict';
 
-var $ = require('jquery');
-var eventHandler = require('c2-event-handler');
-var Dragger = require('jquery-dragger');
-var debounce = require('c2-debounce-af');
+import * as $ from 'jquery';
+import * as eventHandler from 'c2-event-handler';
+import * as Dragger from 'jquery-dragger';
+import * as debounce from 'c2-debounce-af';
 
 var defaults = {
     pageLock: false,
@@ -227,4 +220,4 @@ TrackSlide.prototype.previousPage = previousPage;
 TrackSlide.prototype.nextPage = nextPage;
 TrackSlide.prototype.resize = resize;
 
-module.exports = TrackSlide;
+export default TrackSlide;
