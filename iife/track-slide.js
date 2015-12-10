@@ -1,7 +1,7 @@
 /*!
  * track-slide
  * https://github.com/TheC2Group/track-slide
- * @version 2.3.0
+ * @version 2.4.0
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 var TrackSlide = (function ($,eventHandler,Dragger,debounce) { 'use strict';
