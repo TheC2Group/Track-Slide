@@ -87,6 +87,14 @@ slider.on('slideTo', function (index) {
 
 ### hasDragged
 
+### resize
+
+```js
+slider.on('resize', function (measurements) {
+    console.log(slider.len - measurements.fit); // amount not showing
+});
+```
+
 
 Test
 ----

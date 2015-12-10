@@ -156,6 +156,7 @@ var getMeasurement = function getMeasurement() {
 var resize = function resize() {
     this.m = getMeasurement.call(this);
     slideTo.call(this, this.current);
+    this.emit('resize', this.m);
 };
 
 var setFocus = function setFocus(e) {
