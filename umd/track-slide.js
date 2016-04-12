@@ -1,7 +1,7 @@
 /*!
  * track-slide
  * https://github.com/TheC2Group/track-slide
- * @version 2.4.0
+ * @version 2.4.1
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 (function (global, factory) {
@@ -44,7 +44,7 @@
             // If the track is longer than the bounds
             // And the distance to the item is greater than the difference between the bounds and the length of the track
             // Set the distance to the difference
-            if (this.m.track > this.m.bounds && distance > this.m.track - this.m.bounds) {
+            if (!this.opts.allowEmptySpace && this.m.track > this.m.bounds && distance > this.m.track - this.m.bounds) {
                 distance = this.m.track - this.m.bounds;
             }
         }
@@ -72,7 +72,7 @@
 
     var next = function next() {
         var num = this.current + 1;
-        if (num > this.len - this.m.fit) return;
+        if (num > (this.opts.allowEmptySpace ? this.len - 1 : this.len - this.m.fit)) return;
         slideTo.call(this, num);
     };
 
@@ -147,7 +147,7 @@
             gap = this.$items.get(1).getBoundingClientRect().left - this.$items.get(0).getBoundingClientRect().left - item;
         }
         var fit = (bounds - trackPadding + gap) / (item + gap);
-        fit = Math.min(Math.floor(fit), this.len);
+        fit = Math.max(Math.min(Math.floor(fit), this.len), 1);
 
         return {
             'bounds': bounds,

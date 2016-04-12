@@ -1,6 +1,6 @@
 {
   "name": "track-slide",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Constructor to slide multiple objects on a track rather than individually.",
   "jsnext:main": "track-slide.js",
   "main": "cjs/track-slide.js",

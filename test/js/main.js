@@ -4,7 +4,7 @@ var $ = require('jquery');
 var TrackSlide = require('../../cjs/track-slide');
 
 var slidesIDs = [
-    'slide1',,
+    'slide1',
     'slide2',
     'slide3',
     'slide4',
@@ -22,6 +22,10 @@ slidesIDs.forEach(function (slide) {
 
 sliders.slide1b = new TrackSlide('#slide1b', {
     pageLock: true
+});
+
+sliders.slideAllowEmptySpace = new TrackSlide('#slideAllowEmptySpace', {
+    allowEmptySpace: true
 });
 
 $(document).on('click', '[previous]', function (e) {
