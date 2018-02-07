@@ -1,6 +1,6 @@
 {
   "name": "track-slide",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Constructor to slide multiple objects on a track rather than individually.",
   "jsnext:main": "track-slide.js",
   "main": "cjs/track-slide.js",
@@ -29,7 +29,7 @@
   "dependencies": {
     "c2-debounce-af": "^2.0.0",
     "c2-event-handler": "^2.3.1",
-    "jquery": "^2.1.4",
+    "jquery": "3.0.0",
     "jquery-dragger": "^1.5.1"
   },
   "devDependencies": {
