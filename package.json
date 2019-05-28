@@ -29,7 +29,7 @@
   "dependencies": {
     "c2-debounce-af": "^2.0.0",
     "c2-event-handler": "^2.3.1",
-    "jquery": "3.0.0",
+    "jquery": ">=3.4.0",
     "jquery-dragger": "^1.5.1"
   },
   "devDependencies": {
