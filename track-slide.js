@@ -1,9 +1,9 @@
 'use strict';
 
-import * as $ from 'jquery';
-import * as eventHandler from 'c2-event-handler';
-import * as Dragger from 'jquery-dragger';
-import * as debounce from 'c2-debounce-af';
+import $ from 'jquery';
+import eventHandler from 'c2-event-handler';
+import Dragger from 'jquery-dragger';
+import debounce from 'c2-debounce-af';
 
 var defaults = {
     pageLock: false,

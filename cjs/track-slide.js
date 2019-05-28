@@ -1,9 +1,13 @@
 'use strict';
 
 var $ = require('jquery');
+$ = 'default' in $ ? $['default'] : $;
 var eventHandler = require('c2-event-handler');
+eventHandler = 'default' in eventHandler ? eventHandler['default'] : eventHandler;
 var Dragger = require('jquery-dragger');
+Dragger = 'default' in Dragger ? Dragger['default'] : Dragger;
 var debounce = require('c2-debounce-af');
+debounce = 'default' in debounce ? debounce['default'] : debounce;
 
 var defaults = {
     pageLock: false,

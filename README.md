@@ -103,7 +103,7 @@ Example
 ```
 http-server
 ```
-Navigate to localhost:8080/test/
+Navigate to localhost:8080/example/
 
 Lint the JavaScript:
 ```

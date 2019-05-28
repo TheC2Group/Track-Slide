@@ -1,7 +1,7 @@
 /*!
  * track-slide
  * https://github.com/TheC2Group/track-slide
- * @version 2.4.1
+ * @version 2.4.3
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 (function (global, factory) {
@@ -9,6 +9,11 @@
     typeof define === 'function' && define.amd ? define(['jquery', 'c2-event-handler', 'jquery-dragger', 'c2-debounce-af'], factory) :
     global.TrackSlide = factory(global.jQuery,global.eventHandler,global.Dragger,global.debounce);
 }(this, function ($,eventHandler,Dragger,debounce) { 'use strict';
+
+    $ = 'default' in $ ? $['default'] : $;
+    eventHandler = 'default' in eventHandler ? eventHandler['default'] : eventHandler;
+    Dragger = 'default' in Dragger ? Dragger['default'] : Dragger;
+    debounce = 'default' in debounce ? debounce['default'] : debounce;
 
     var defaults = {
         pageLock: false,
